@@ -19,37 +19,36 @@ import java.util.List;
 @Slf4j
 public class ItemController {
     private final ItemService itemService;
-    private final ItemMapper itemMapper;
 
     @PostMapping
     public ItemDto addItem(@RequestHeader("X-Sharer-User-Id") long userId, @Valid @RequestBody ItemDto itemDto) {
-        Item newItem = itemMapper.toItem(itemDto);
+        Item newItem = ItemMapper.toItem(itemDto);
         log.info("Adding item: {}", newItem);
-        return itemMapper.toItemDto(itemService.addItem(userId, newItem));
+        return ItemMapper.toItemDto(itemService.addItem(userId, newItem));
     }
 
     @PatchMapping("/{itemId}")
     public ItemDto updateItem(@RequestHeader("X-Sharer-User-Id") long userId,
                               @Valid @RequestBody PatchItemDto patchDto, @PathVariable int itemId) {
-        Item itemToUpdate = itemMapper.fromPatchItemDto(patchDto);
+        Item itemToUpdate = ItemMapper.fromPatchItemDto(patchDto);
         log.info("Updating by id: {} item: {}", itemId, itemToUpdate);
-        return itemMapper.toItemDto(itemService.updateItem(userId, itemId, itemToUpdate));
+        return ItemMapper.toItemDto(itemService.updateItem(userId, itemId, itemToUpdate));
     }
 
     @GetMapping
     public List<ItemDto> getAllItems(@RequestHeader("X-Sharer-User-Id") long userId) {
         log.info("Getting all items by user: {}", userId);
-        return itemMapper.toItemDtos(itemService.getAllItems(userId));
+        return ItemMapper.toItemDtos(itemService.getAllItems(userId));
     }
 
     @GetMapping("/{itemId}")
     public ItemDto getItemById(@RequestHeader("X-Sharer-User-Id") long userId, @PathVariable long itemId) {
-        return itemMapper.toItemDto(itemService.getItemById(itemId, userId));
+        return ItemMapper.toItemDto(itemService.getItemById(itemId, userId));
     }
 
     @GetMapping("/search")
     public List<ItemDto> searchItem(@RequestParam String text) {
         log.info("Searching by text: {}", text);
-        return itemMapper.toItemDtos(itemService.getItemsByText(text));
+        return ItemMapper.toItemDtos(itemService.getItemsByText(text));
     }
 }

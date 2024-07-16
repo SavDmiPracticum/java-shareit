@@ -1,13 +1,13 @@
 package ru.practicum.shareit.item.mapper;
 
-import org.springframework.stereotype.Component;
+import lombok.experimental.UtilityClass;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.dto.PatchItemDto;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
 
-@Component
+@UtilityClass
 public class ItemMapper {
     public ItemDto toItemDto(Item item) {
         return ItemDto.builder()
@@ -30,7 +30,7 @@ public class ItemMapper {
     public List<ItemDto> toItemDtos(List<Item> items) {
         return items
                 .stream()
-                .map(this::toItemDto)
+                .map(ItemMapper::toItemDto)
                 .toList();
     }
 

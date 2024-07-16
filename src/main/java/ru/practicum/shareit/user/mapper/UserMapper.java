@@ -1,13 +1,13 @@
 package ru.practicum.shareit.user.mapper;
 
-import org.springframework.stereotype.Component;
+import lombok.experimental.UtilityClass;
 import ru.practicum.shareit.user.dto.PatchUserDto;
 import ru.practicum.shareit.user.dto.UserDTO;
 import ru.practicum.shareit.user.model.User;
 
 import java.util.List;
 
-@Component
+@UtilityClass
 public class UserMapper {
     public UserDTO toUserDTO(User user) {
         return UserDTO.builder()
@@ -35,7 +35,7 @@ public class UserMapper {
     public List<UserDTO> toUserDTOs(List<User> users) {
         return users
                 .stream()
-                .map(this::toUserDTO)
+                .map(UserMapper::toUserDTO)
                 .toList();
     }
 }

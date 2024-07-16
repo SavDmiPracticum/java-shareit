@@ -1,5 +1,7 @@
 package ru.practicum.shareit.booking.model;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +17,9 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Booking {
     Long id;
+    @FutureOrPresent
     LocalDateTime start;
+    @Future
     LocalDateTime end;
     Item item;
     User booker;
