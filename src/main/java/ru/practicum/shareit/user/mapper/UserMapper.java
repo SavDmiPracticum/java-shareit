@@ -1,7 +1,7 @@
 package ru.practicum.shareit.user.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.practicum.shareit.user.dto.PatchUserDto;
+import ru.practicum.shareit.user.dto.UserUpdateDto;
 import ru.practicum.shareit.user.dto.UserDTO;
 import ru.practicum.shareit.user.model.User;
 
@@ -25,7 +25,7 @@ public class UserMapper {
                 .build();
     }
 
-    public User updateUser(PatchUserDto userDto) {
+    public User updateUser(UserUpdateDto userDto) {
         return User.builder()
                 .name(userDto.getName())
                 .email(userDto.getEmail())

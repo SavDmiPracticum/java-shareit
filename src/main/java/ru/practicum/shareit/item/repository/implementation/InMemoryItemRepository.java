@@ -9,12 +9,14 @@ import java.util.*;
 @Repository
 public class InMemoryItemRepository implements ItemRepository {
     private final Map<Long, Item> items = new HashMap<>();
+    private final Map<Long, List<Item>> ownerItems = new HashMap<>();
     private long index = 0L;
 
     @Override
     public Item save(Item entity) {
         if (entity.getId() == null) {
             entity.setId(++index);
+            ownerItems.computeIfAbsent(entity.getOwner().getId(), k -> new ArrayList<>()).add(entity);
         }
         items.put(entity.getId(), entity);
         return items.get(entity.getId());
@@ -38,10 +40,7 @@ public class InMemoryItemRepository implements ItemRepository {
 
     @Override
     public List<Item> findByUserId(long userId) {
-        return items.values()
-                .stream()
-                .filter(item -> item.getOwner().getId().equals(userId))
-                .toList();
+        return ownerItems.getOrDefault(userId, Collections.emptyList());
     }
 
     @Override

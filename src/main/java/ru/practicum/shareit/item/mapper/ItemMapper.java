@@ -2,7 +2,7 @@ package ru.practicum.shareit.item.mapper;
 
 import lombok.experimental.UtilityClass;
 import ru.practicum.shareit.item.dto.ItemDto;
-import ru.practicum.shareit.item.dto.PatchItemDto;
+import ru.practicum.shareit.item.dto.ItemUpdateDto;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class ItemMapper {
                 .toList();
     }
 
-    public Item fromPatchItemDto(PatchItemDto dto) {
+    public Item fromPatchItemDto(ItemUpdateDto dto) {
         return Item.builder()
                 .name(dto.getName())
                 .description(dto.getDescription())

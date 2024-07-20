@@ -1,6 +1,5 @@
-package ru.practicum.shareit.user.dto;
+package ru.practicum.shareit.item.dto;
 
-import jakarta.validation.constraints.Email;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -9,8 +8,8 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class PatchUserDto {
+public class ItemUpdateDto {
     String name;
-    @Email
-    String email;
+    String description;
+    Boolean available;
 }
