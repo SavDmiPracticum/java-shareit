@@ -57,7 +57,7 @@ public class BookingServiceImpl implements BookingService {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow(
                 () -> new NotFoundException("Booking with id " + bookingId + " not found"));
         if (booking.getItem().getOwner().getId() != userId) {
-            throw new NotFoundException("You do not own this item in booking");
+            throw new NotAvailableException("You do not own this item in booking");
         }
         if (booking.getStatus() == BookingStatus.APPROVED) {
             throw new NotAvailableException("Booking is already approved");

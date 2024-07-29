@@ -29,6 +29,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDTO createUser(UserDTO userDto) {
+        userRepository.findByEmail(userDto.getEmail()).ifPresent(user -> {
+            throw new ValidationException("User with email " + user.getEmail() + " already exists");
+        });
         return UserMapper.toUserDTO(userRepository.save(UserMapper.toUser(userDto)));
     }
 
