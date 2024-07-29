@@ -4,10 +4,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareit.user.dto.UserUpdateDto;
 import ru.practicum.shareit.user.dto.UserDTO;
-import ru.practicum.shareit.user.mapper.UserMapper;
-import ru.practicum.shareit.user.model.User;
+import ru.practicum.shareit.user.dto.UserUpdateDto;
 import ru.practicum.shareit.user.service.UserService;
 
 import java.util.List;
@@ -21,28 +19,26 @@ public class UserController {
 
     @PostMapping
     public UserDTO createUser(@Valid @RequestBody UserDTO userDto) {
-        User user = userService.createUser(UserMapper.toUser(userDto));
-        log.info("User created: {}", user);
-        return UserMapper.toUserDTO(user);
+        log.info("User created: {}", userDto);
+        return userService.createUser(userDto);
     }
 
     @PatchMapping("/{id}")
     public UserDTO updateUser(@PathVariable Long id, @Valid @RequestBody UserUpdateDto userDto) {
-        User user = userService.updateUser(id, UserMapper.updateUser(userDto));
-        log.info("User updated: {}", user);
-        return UserMapper.toUserDTO(user);
+        log.info("User updated: {}", userDto);
+        return userService.updateUser(id, userDto);
     }
 
     @GetMapping("/{id}")
     public UserDTO getUser(@PathVariable long id) {
         log.info("User get: {}", id);
-        return UserMapper.toUserDTO(userService.getUser(id));
+        return userService.getUser(id);
     }
 
     @GetMapping
     public List<UserDTO> getAllUsers() {
         log.info("Get all users");
-        return UserMapper.toUserDTOs(userService.getAllUsers());
+        return userService.getAllUsers();
     }
 
     @DeleteMapping("/{id}")

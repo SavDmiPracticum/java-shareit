@@ -2,12 +2,12 @@ package ru.practicum.shareit.item.repository.implementation;
 
 import org.springframework.stereotype.Repository;
 import ru.practicum.shareit.item.model.Item;
-import ru.practicum.shareit.item.repository.ItemRepository;
+import ru.practicum.shareit.item.repository.ItemRepositoryMemory;
 
 import java.util.*;
 
 @Repository
-public class InMemoryItemRepository implements ItemRepository {
+public class InMemoryItemRepository implements ItemRepositoryMemory {
     private final Map<Long, Item> items = new HashMap<>();
     private final Map<Long, List<Item>> ownerItems = new HashMap<>();
     private long index = 0L;

@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import ru.practicum.shareit.exception.NotAvailableException;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.exception.ValidationException;
 import ru.practicum.shareit.exception.model.ErrorResponse;
@@ -34,6 +35,13 @@ public class ExceptionController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handleCommonException(RuntimeException ex) {
+        log.error(ex.getMessage(), ex);
+        return new ErrorResponse(ex.getMessage(), ExceptionUtils.getStackTrace(ex));
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleNotAvailableException(NotAvailableException ex) {
         log.error(ex.getMessage(), ex);
         return new ErrorResponse(ex.getMessage(), ExceptionUtils.getStackTrace(ex));
     }

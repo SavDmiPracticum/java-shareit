@@ -1,8 +1,9 @@
-package ru.practicum.shareit.request.model;
+package ru.practicum.shareit.item.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 import ru.practicum.shareit.user.model.User;
 
 import java.time.LocalDateTime;
@@ -12,15 +13,22 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 @Entity
-@Table(name = "requests")
-public class ItemRequest {
+@Table(name = "comments")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @Column(nullable = false)
-    String description;
-    @ManyToOne(fetch = FetchType.EAGER)
-    User requestor;
+    String text;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    Item item;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    User author;
+    @CreationTimestamp
     LocalDateTime created;
 }
