@@ -11,6 +11,6 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class UserUpdateDto {
     String name;
-    @Email
+    @Email(message = "email violated")
     String email;
 }

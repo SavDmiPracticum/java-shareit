@@ -13,9 +13,9 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class UserDTO {
     Long id;
-    @NotBlank
+    @NotBlank(message = "name not blank")
     String name;
-    @NotNull
-    @Email
+    @NotNull(message = "email not null")
+    @Email(message = "email violated")
     String email;
 }

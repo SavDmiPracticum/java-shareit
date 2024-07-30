@@ -2,12 +2,12 @@ package ru.practicum.shareit.user.repository.implementation;
 
 import org.springframework.stereotype.Repository;
 import ru.practicum.shareit.user.model.User;
-import ru.practicum.shareit.user.repository.UserRepository;
+import ru.practicum.shareit.user.repository.UserRepositoryMemory;
 
 import java.util.*;
 
 @Repository
-public class InMemoryUserRepository implements UserRepository {
+public class InMemoryUserRepository implements UserRepositoryMemory {
     private final Map<Long, User> users = new HashMap<>();
     private long index = 0L;
 
